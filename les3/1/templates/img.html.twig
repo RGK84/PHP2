@@ -1,0 +1,7 @@
+{% extends "layouts/app.html.twig" %}
+
+{% block title %}Фото: {{img.description}}{% endblock %}
+
+{% block content %}
+<img class="img" src="img/{{img.link}}" alt="{{img.description}}">
+{% endblock %}
