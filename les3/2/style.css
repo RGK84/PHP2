@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.title {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.library {
+    padding: 50px calc(50% - 1200px/2);
+}
+
+.table {
+    border-collapse: collapse;
+    border: 1px solid black;
+    font-size: 16px;
+}
+
+th, td {
+    border: 1px solid black;
+}
+
+td {
+    width: 15%;
+    padding: 10px;
+}
+
+td:first-child {
+    width: 5%;
+}
+
+td:nth-child(2) {
+    width: 40%;
+}
