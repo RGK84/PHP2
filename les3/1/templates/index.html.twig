@@ -1,0 +1,15 @@
+{% extends "layouts/app.html.twig" %}
+
+{% block title %}Фотогалерея{% endblock %}
+
+{% block content %}
+<h1 class="title">Галерея</h1>
+
+<section class="gallery">
+    {% for img in imgArr %}
+    <a class="item" href="img.php?id={{img.id}}" target="blank">
+        <img class="item__img" src="img/{{img.link}}" alt="{{img.description}}">
+    </a>
+    {% endfor %}
+</section>
+{% endblock %}

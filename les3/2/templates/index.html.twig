@@ -1,0 +1,30 @@
+{% extends "layouts/app.html.twig" %}
+
+{% block title %}Библиотека{% endblock %}
+
+{% block content %}
+<section class="library">
+    <table class="table">
+        <caption class="title">Библиотека</caption>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Publisher</th>
+            <th>Category</th>
+            <th>Pages</th>
+        </tr>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.id }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.publisher }}</td>
+                <td>{{ book.category }}</td>
+                <td>{{ book.pages }}</td>
+            </tr>
+            {% endfor %}
+    </table>
+</section>
+{% endblock %}
