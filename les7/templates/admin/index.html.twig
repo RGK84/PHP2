@@ -1,0 +1,15 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block header %}
+    <header class="admin__catalog">
+        <div class="container catalog__container">
+            <h2 class="catalog__title">Админка</h2>
+            <a href="{{ path('adminorders') }}" class="catalog__btn btn__add">Список заказов</a>
+            <a href="{{ path('catalog') }}" class="catalog__btn btn__add">Вернуться в магазин</a>
+        </div>
+    </header>
+{% endblock %}
+
+{% block main %}
+
+{% endblock %}
