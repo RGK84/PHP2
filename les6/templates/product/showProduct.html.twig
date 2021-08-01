@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}- {{ product.name }}{% endblock %}
+
+{% block main %}
+    <div class="main-product__img">
+        <a href="#" class="slider-arrow"><i class="fas fa-chevron-left"></i></a>
+        <img src="/img/{{ product.link }}" alt={{ product.name }} class="main-product__img_bg">
+        <a href="#" class="slider-arrow"><i class="fas fa-chevron-right"></i></a>
+    </div>
+    <section class="main-product">
+        <a href="#" class="main-product__catalog">{{ product.collection }}</a>
+        <div class="main-product__line"></div>
+        <h2 class="main-product__title">{{ product.name }}</h2>
+        <p class="main-product__desc">{{ product.description }}</p>
+        <p class="main-product__price">{{ product.price }} руб.</p>
+        <form class="main-product__options" method="post" action="{{ path('cartadd') }}">
+            <div class="main-product__choose">
+                <div class="main-product__choose_title">Количество</div><input type="number" name="quantity" class="main-product__input" value="1">
+            </div>
+            <input type="hidden" name="product_id" value="{{ product.id }}">
+            <button type="submit" class="add-to-cart__btn" name="add_to_cart"><span class="add-to-cart__text">В корзину</span></button>
+        </form>
+    </section>
+{% endblock %}

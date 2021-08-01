@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}- Корзина{% endblock %}
+
+{% block main %}
+    <section class="shop-cart">
+        <div class="container">
+            <h2 class="title hidden">Корзина</h2>
+            <form class="shop-cart__box" method="post">
+                <div class="shop-cart__titles">
+                    <button class="shop-cart__title shop-cart__title_big">Описание товара</button>
+                    <button class="shop-cart__title">Цена</button>
+                    <button class="shop-cart__title">Количество</button>
+                    <button class="shop-cart__title">Доставка</button>
+                    <button class="shop-cart__title">Стоимость</button>
+                </div>
+                {% for product in products %}
+                <div class="shop-cart__item">
+                    <div class="shop-cart__item_details">
+                        <img class="shop-cart__item_img" src="/img/{{ product.link }}" alt={{ product.name }}>
+                        <div class="shop-cart__item_desc">
+                            <h3><a href="{{ path('product', { id: product.id }) }}" class="shop-cart__item_title">{{ product.name }}</a></h3>
+                        </div>
+                    </div>
+                    <div class="shop-cart__item_char shop-cart__item_price">{{ product.price }} руб.</div>
+                    <div class="shop-cart__item_char shop-cart__item_numb">{{ product.quantity }}</div>
+                    <div class="shop-cart__item_char shop-cart__item_shipping">FREE</div>
+                    <div class="shop-cart__item_char shop-cart__item_subtotal">{{ product.total }} руб.</div>
+                </div>
+                {% endfor %}
+                <div class="shop-cart__btns">
+                    <a href="{{ path('cartdel') }}" class="shop-cart__btn_reset" type="submit">Очистить корзину</a>
+                </div>
+            </form>
+            <form class="shop-cart__options" method="post" action="{{ path('checkout') }}">
+                <div class="shop-cart__form">
+                    <h3 class="shop-cart__options_title">Данные для доставки</h3>
+                    <input type="text" name="fullname" class="shop-cart__address_postcode" placeholder="ФИО" required>
+                    <input type="text" name="phone" class="shop-cart__address_postcode" placeholder="Телефон" maxlength="11" required pattern="[0-9]{11}">
+                    <input type="text" name="address" class="shop-cart__address_postcode" placeholder="Адрес" required>
+                </div>
+                <div class="shop-cart__checkout_box">
+                    <p class="shop-cart__checkout_subtotal">Итого&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ total }} руб.</p>
+                    <p class="shop-cart__checkout_total">Итого к оплате&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="pink">{{ total }} руб.</span></p>
+                    <button type="submit" class="shop-cart__checkout" name="checkout">Оформить</button>
+                </div>
+            </form>
+            <?php endif; ?>
+        </div>
+    </section>
+{% endblock %}
