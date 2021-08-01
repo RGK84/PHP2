@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRANDSHOP {% block title %}{% endblock %}</title>
+    {% block stylesheets %}
+    <script src="https://kit.fontawesome.com/747a53ae8a.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    {% endblock %}
+</head>
+
+<body>
+<header class="header">
+    <div class="container">
+        <div class="header__main-box">
+            <a href="{{ path('catalog') }}" class="logo">
+                <img src="/img/logo.png" alt="" class="logo__img">
+                <span class="logo__text">BRAN<span class="logo__spec">D</span></span>
+            </a>
+            <div class="search-box">
+                <div class="search-box__browse-box">
+                    <button class="search-box__browse-btn">Поиск<i class="fas fa-caret-down"></i></button>
+                </div>
+                <form action="post" class="search-box__field">
+                    <input type="text" name="search" placeholder="Поиск по..." class="search-box__input">
+                    <button type="submit" class="search-box__submit"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+            <div class="account">
+                <div class="account__cart-box">
+                    <a href="{{ path('cart') }}" class="account__cart"><img src="/img/cart.svg" alt="корзина"></a>
+                </div>
+                {% if app.user %}
+                    <div class="account__cart-box">
+                        <a href="{{ path('profile') }}" class="account__btn">{{ app.user.name }}</a>
+                        <a class="login__btn registration__link" href="{{ path('app_logout') }}">Выйти</a>
+                        {% for role in app.user.roles %}
+                            {% if role == 'ROLE_ADMIN' %}
+                                <a class="login__btn registration__link" href="{{ path('app_logout') }}">Админка</a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <a href="{{ path('app_login') }}" class="account__btn">Войти</i></a>
+                    <a href="{{ path('registration') }}" class="account__btn">Регистрация</i></a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</header>
+<nav>
+    <div class="container">
+        <input type="checkbox" id="menu-checkbox" class="menu-checkbox">
+        <div class="menu">
+            <label for="menu-checkbox" class="toggle-btn" data-open="&#9776;" data-close="&#9776;" onclick></label>
+            <ul class="menu__box">
+                <li class="menu__item"><a href="{{ path('catalog') }}" class="menu__link">Домой</a></li>
+                <li class="menu__item"><a href="#" class="menu__link">Мужчинам</a></li>
+                <li class="menu__item"><a href="#" class="menu__link">Женщинам</a></li>
+                <li class="menu__item"><a href="#" class="menu__link">Детям</a></li>
+                <li class="menu__item"><a href="#" class="menu__link">Аксессуары</a></li>
+                <li class="menu__item"><a href="#" class="menu__link">Рекомендации</a></li>
+                <li class="menu__item"><a href="#" class="menu__link">Акции</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<main>
+    {% block main %}{% endblock %}
+</main>
+<footer class="footer">
+    <div class="footer__bottom">
+        <div class="container">
+            <div class="footer__block">
+                <div class="copy">&copy; <?php echo date("Y") ?>  Brandshop  Все права защищены.</div>
+                <div class="socials">
+                    <a href="#" class="socials__btn"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="socials__btn"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="socials__btn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="socials__btn"><i class="fab fa-pinterest-p"></i></a>
+                    <a href="#" class="socials__btn"><i class="fab fa-google-plus-g"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+{% block script %}{% endblock %}
+</body>
+</html>
