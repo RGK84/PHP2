@@ -1,0 +1,50 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block header %}
+    <header class="admin__catalog">
+        <div class="container catalog__container">
+            <h2 class="catalog__title">Список заказов</h2>
+            <a href="{{ path('admin') }}" class="catalog__btn btn__add">Назад</a>
+            <a href="{{ path('catalog') }}" class="catalog__btn btn__add">Вернуться в магазин</a>
+        </div>
+    </header>
+{% endblock %}
+
+{% block main %}
+    <section class="admin__catalog">
+        <div class="container catalog__container">
+            <div class="catalog__box">
+                {% for order in orders %}
+                <div class="catalog__info">
+                    <p><span class="bold">Номер заказа: </span>{{ order.id }}</p>
+                    <p><span class="bold">Сумма заказа: </span>{{ order.amount }}</p>
+                    <p><span class="bold">Логин пользователя: </span>{{ order.username }}</p>
+                    <p><span class="bold">Дата создания заказа: </span>{{ order.create_at }}</p>
+                    <form class="form" method="post" action="{{ path('editorder') }}">
+                        <p class="form__input_status">
+                            <span class="bold">Статус: </span>
+                            <select class="orderStatus" name="status" required>
+                                <option disabled selected>{{ order.status_active }}</option>
+                                {% for key,name in order.status %}
+                                    <option value="{{ key }}">{{ name }}</option>
+                                {% endfor %}
+                            </select>
+                        </p>
+                        <div class="catalog__btns">
+                            <input type="hidden" name="id" value="{{ order.id }}">
+                            <button class="catalog__btn btn__edit" type="submit" name="edit_order">Редактировать</button>
+                            <a href="{{ path('deleteorder', { id: order.id }) }}" class="catalog__btn">Удалить</a>
+                        </div>
+                    </form>
+                </div>
+                <br><hr>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block script %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="/js/script.js"></script>
+{% endblock %}
